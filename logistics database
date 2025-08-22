@@ -1,0 +1,95 @@
+CREATE TABLE customers (
+
+cust_id INTEGER PRIMARY KEY,
+
+cname TEXT,
+
+DATE NONE NOT NULL,
+
+invoice INTEGER,
+
+balance NUMERIC
+
+
+
+
+);
+
+
+
+
+INSERT INTO customers VALUES (1, "BBC Co", '07-03-2014', 1004, 10000);
+
+INSERT INTO customers VALUES (2, "ZTA", '08-11-2014', 1005, 25000);
+
+INSERT INTO customers VALUES (3, "ABY", '06-22-2017', 1006, 35000);
+
+INSERT INTO customers VALUES (4, "HIP", '03-27-2016', 1007, 0);
+
+INSERT INTO customers VALUES (5, "TIME",'09-14-2015', 1008, 900);
+
+INSERT INTO customers VALUES (6, "SWE",'02-17-2017', 1009, 18000);
+
+INSERT INTO customers VALUES (7, "SVW",'04-30-2017', 1010, 50000);
+
+SELECT * from customers;
+
+
+
+
+SELECT *
+
+from customers
+
+WHERE balance >=
+
+(Select MAX(balance) from customers where balance != 0
+
+and date < '04-30-2017');
+
+
+
+
+SELECT cname, invoice, balance from customers WHERE balance > 10000 and invoice != 1005;
+
+
+
+
+CREATE TABLE loads (id INTEGER PRIMARY KEY, city TEXT, fuel_fixed NUMERIC, weight NUMERIC);
+
+
+
+
+INSERT INTO loads VALUES (1, "LA", 500, 1000);
+
+INSERT INTO loads VALUES (2, "Omaha", 700, 3500);
+
+INSERT INTO loads VALUES (3, "Dayton", 1400, 5500);
+
+INSERT INTO loads VALUES (4, "Denver", 2500, 4100);
+
+INSERT INTO loads VALUES (5, "Paris", 100, 1000);
+
+INSERT INTO loads VALUES (6, "Ridgewood", 700, 1500);
+
+INSERT INTO loads VALUES (7, "Rochelle", 747, 1500);
+
+SELECT * from loads;
+
+
+
+
+SELECT * from customers
+
+JOIN loads ON loads.id = customers.cust_id
+
+WHERE balance > 0;
+
+
+
+
+SELECT cname, city, balance, weight from customers
+
+JOIN loads ON loads.id = customers.cust_id
+
+WHERE city != "Denver";
