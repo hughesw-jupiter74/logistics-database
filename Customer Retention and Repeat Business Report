@@ -1,0 +1,14 @@
+SELECT 
+    cust_name,
+    COUNT(load_id) AS total_shipments,
+    MIN(ship_date) AS first_shipment,
+    MAX(ship_date) AS last_shipment,
+    SUM(cust_total) AS total_revenue
+FROM 
+    loads
+GROUP BY 
+    cust_name
+HAVING 
+    COUNT(load_id) > 1
+ORDER BY 
+    total_shipments DESC;
